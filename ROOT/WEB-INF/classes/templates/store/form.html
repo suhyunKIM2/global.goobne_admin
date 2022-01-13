@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xml:lang="ko" lang="ko" class="no-js" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="/fragments/common :: head">
+    <link href="/global/css/reset.css" type="text/css" rel="stylesheet">
+    <link href="/global/css/common.css" type="text/css" rel="stylesheet">
+    <script src="/global/js/jquery.min.js"></script>
+    <script src="/global/js/common.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+<header role="header" data-include="/header.html" th:replace="/fragments/common :: header"></header>
+<div class="content_ content_table">
+    <h2>매장관리</h2>
+
+    <!-- contents 영역 -->
+    <form th:method="post" th:object="${form}" th:action="@{/store}">
+        <input type="hidden" th:field="*{idx}"/>
+
+        <table class="bid_table bid_write_table">
+            <tr>
+                <th>국가</th>
+                <td>
+                    <select class="form-control" th:field="*{country}">
+                        <option value="">국가 선택</option>
+                        <option th:each="obj : ${countryList}" th:text="${obj.countryName}" th:value="${obj.idx}"></option>
+                    </select>
+                    <div th:class="text_red" th:if="${#fields.hasErrors('country')}" th:errors="*{country}">에러 메시지</div>
+                </td>
+            </tr>
+            <tr>
+                <th>매장명</th>
+                <td>
+                    <input type="text" class="input_storename" placeholder="매장명을 입력하세요." th:field="*{storeName}">
+                    <div th:class="text_red" th:if="${#fields.hasErrors('storeName')}" th:errors="*{storeName}">에러 메시지</div>
+                </td>
+            </tr>
+            <tr>
+                <th>매장코드</th>
+                <td>
+                    <input type="text" class="input_storename" placeholder="매장코드를 입력하세요." th:name="storeCode" th:value="${form.idx != null ? form.storeCode : ''}" th:disabled="${form.idx != null}" th:style="${form.idx != null ? 'background-color: #d7d7d7' : ''}">
+                    <div th:class="text_red" th:if="${#fields.hasErrors('storeCode')}" th:errors="*{storeCode}">에러 메시지</div>
+                </td>
+            </tr>
+            <tr>
+                <th>지점</th>
+                <td>
+                    <input type="text" class="input_storename" placeholder="지점을 입력하세요." th:field="*{spot}">
+                </td>
+            </tr>
+            <tr>
+                <th>비고</th>
+                <td><input type="text" class="input_storename" placeholder="비고" th:field="*{note}"></td>
+            </tr>
+            <tr>
+                <th>오픈여부</th>
+                <td>
+                    <!--<label th:for="${#ids.next('stateOpen')}" th:text="'오픈'">Covered</label>
+                    <input type="checkbox" th:field="*{stateOpen}" />-->
+                    <input type="checkbox" name="stateOpen" id="stateOpen" th:checked="${form.stateOpen}"> <label for="stateOpen">적용</label>
+                </td>
+            </tr>
+            <tr>
+                <th>사업계획여부</th>
+                <td>
+                    <input type="checkbox" name="statePlan" id="statePlan" th:checked="${form.statePlan}"> <label for="statePlan">적용</label>
+                </td>
+            </tr>
+        </table>
+
+        <div class="bottom">
+            <div class="bottom_buttons">
+                <a class="btn delete" href="/store">취소</a>
+                <button class="btn submit" type="submit" th:text="${idx != null ? '수정' : '저장'}">저장</button>
+            </div>
+        </div>
+    </form>
+    <!-- contents 영역 -->
+
+</div>
+<footer role="footer" data-include="/footer.html" th:replace="/fragments/common :: footer"></footer>
+</body>
+</html>
