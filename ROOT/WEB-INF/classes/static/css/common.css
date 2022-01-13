@@ -1,3 +1,4 @@
+@charset "utf-8";
 /* stylesheet for demo and examples */
 
 @import url(http://fonts.googleapis.com/css?family=Lobster+Two:700italic,700);
@@ -377,6 +378,8 @@ a{outline: 0;}
     vertical-align: middle;
     text-align: center;
 }
+/*20220114*/
+.select_date .btn_confirm_duplication{height:30px !important;line-height:27px !important;}
 .text_red {
     color: #b20e1a;
 }
@@ -392,6 +395,8 @@ a{outline: 0;}
 }
 
 .content_ table.bid_write_table tr td{text-align:left;}
+/*20220114*/
+.content_ table.bid_write_table tr td .form-control{padding:0.5% 0;}
 select[name="construction_division"]{width:15%;padding-left:2%;}
 input[name="phonenumber_2nd"], input[name="phonenumber_3rd"]{width:30%;height: 30px;padding-left: 2%;}
 select[name="phonenumber_1st"], select[name="construction_division"]{height:35px;line-height: 35px;width:20%;padding-left: 1%;}
@@ -535,7 +540,7 @@ input[name="pwd"],input[name="N_Phone"]{height:35px;line-height: 35px;padding-le
 
 /*�빐�쇅 留ㅼ텧 愿�由� 議고쉶*/
 .select_date{margin-bottom:1%;float:left;    width: 80%;}
-.select_date select{height:24px;line-height:24px;border:1px solid #999;font-size:13px;min-width:auto;padding:0 15px;}/*20220113*/
+.select_date select{/*20220114*/height:30px;line-height:30px;border:1px solid #999;font-size:13px;min-width:auto;padding:0 15px;}/*20220113*/
 .Excel_btn{width:auto;float:right;height:37px;line-height: 37px;background: #107c41;color: #fff;cursor: pointer;padding: 0 2%;margin-bottom:1%;}/*20220113*/
 .content_table{visibility: hidden;opacity: 0;}
 .table-scroll {
