@@ -1,0 +1,25 @@
+body{min-width: auto;}
+@media screen and (max-width: 960px){
+.content_ table.bid_table tr td {
+    line-height: normal;
+    height: auto;}
+.bottom_buttons {
+    margin-top: 15px;
+    margin-bottom: 7%;
+} 
+.btn_confirm_duplication {
+    width: 88px !important;
+}
+.btn{height:35px;line-height: 35px;}
+.content_ table.bid_table tr td {
+    font-size: 13px;
+}
+.input_storename, .input_storekeepername{width:90%;}
+
+}
+@media screen and (max-width: 660px){
+.content_ table.bid_write_table tr th {
+    width: 15%;} 
+.content_ table tr th{border-bottom:0;}   
+.select_date{width:100%;}
+}

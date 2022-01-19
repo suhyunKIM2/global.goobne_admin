@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xml:lang="ko" lang="ko" class="no-js" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="/fragments/common :: head">
+    <link href="/css/reset.css" type="text/css" rel="stylesheet">
+    <link href="/css/common.css" type="text/css" rel="stylesheet">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/common.js"></script>
+    <meta charset="utf-8">
+   
+</head>
+<!-- 오늘날짜 표시 tr에 class :today 추가 / 강조 tr에 class :accent_color 추가 / table 일정 값보다 데이터가 오바 될때 자동 가로 스크롤 생성 제이쿼리 추가 => tr 첫번째 th에 class :fixed-side 로 유지 -->
+<body>
+
+<header role="header" data-include="/header.html" th:replace="/fragments/common :: header"></header>
+<!--S: 220119 추가 (반응형 css)--->
+<link href="/css/form_media.css" type="text/css" rel="stylesheet">
+<!--E: 220119 추가 (반응형 css)--->
+<div class="content_ content_table">
+    <h2>매출등록 <span sec:authentication="principal.member.store.storeName">/</span></h2>
+
+    <!-- contents 영역 -->
+    <form th:method="post" th:object="${form}" th:action="@{/sales}" onsubmit="return submitChk();">
+        <table class="bid_table bid_write_table">
+            <tr>
+                <th>DATE</th>
+                <td>
+                    <input type="text" class="input_storename" placeholder="날짜를 입력하세요." id="date" name="countryName" th:name="'date'" th:readonly="true" th:value="${#calendars.format(#calendars.createNow(), 'yyyy-MM-dd')}">
+                </td>
+                <th>SALES</th>
+                <td>
+                    <input type="text" class="input_storename" placeholder="매출을 입력하세요." name="countryName" th:name="'price'" th:value="0" onkeyup="this.value=this.value.replace(/[^-0-9]/g,'');">
+                    <div th:class="text_red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">에러 메시지</div>
+                </td>
+            </tr>
+        </table>
+        <div class="bottom">
+            <div class="bottom_buttons">
+                <button class="btn submit" type="submit">저장</button>
+            </div>
+        </div>
+    </form>
+
+    <form th:action="@{/sales/form}" method="get">
+        <div class="select_date">
+            <select th:name="yyyy" title="년도" class="select w80">
+                <option th:each="yyyy : ${#numbers.sequence(#calendars.year(#calendars.createNow()), 2020)}" th:value="${yyyy}" th:text="${yyyy}"
+                        th:selected="(${#strings.equals(param.yyyy, yyyy)} and not ${#strings.isEmpty(param.yyyy)}) or (${#calendars.year(#calendars.createNow())} eq ${yyyy} and ${#strings.isEmpty(param.yyyy)})"></option>
+            </select>
+            <select th:name="mm" title="월" class="select w80">
+                <option th:each="month : ${#numbers.sequence(1, 12)}" th:text="${month}" th:value="${month}"
+                        th:selected="(${#strings.equals(param.mm, month)} and not ${#strings.isEmpty(param.mm)}) or (${#calendars.month(#calendars.createNow())} eq ${month} and ${#strings.isEmpty(param.mm)})"></option>
+            </select>
+            <button class="btn btn_confirm_duplication" style="background:#0c66b3;border:1px solid #0c66b3;" type="submit">검색</button>
+        </div>
+    </form>
+
+    <table class="bid_table bid_write_table">
+        <tr th:each="obj, idx : ${salesList}">
+            <th th:text="${obj.date}"></th>
+            <td th:text="${#numbers.formatInteger(obj.price, 0, 'COMMA')}"></td>
+        </tr>
+        <tr>
+            <th>total</th>
+            <td th:text="${#numbers.formatInteger(salesTotal, 0, 'COMMA')}"></td>
+        </tr>
+    </table>
+
+    <!-- contents 영역 -->
+
+</div>
+<footer role="footer" data-include="/footer.html" th:replace="/fragments/common :: footer"></footer>
+<script>
+    const $inputPrice = document.querySelector('input[name=price]');
+
+    const submitChk = () => {
+        if ($inputPrice.value === '') {
+            alert('금액을 넣어주세요');
+            return false;
+        } else if (parseInt($inputPrice.value) < 1) {
+            alert('0 보다 큰 금액을 넣어주세요.');
+            return false;
+        }
+    }
+
+    window.onload = function () {
+        $('#date').datepicker($datePickerOp);
+
+        $inputPrice.addEventListener('blur', () => {
+            return submitChk();
+        });
+
+    }
+
+
+
+
+
+
+</script>
+</body>
+</html>
