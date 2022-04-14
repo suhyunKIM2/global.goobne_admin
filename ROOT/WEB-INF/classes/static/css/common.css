@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 /* stylesheet for demo and examples */
 
 @import url(http://fonts.googleapis.com/css?family=Lobster+Two:700italic,700);
@@ -6,8 +6,8 @@
 
 
 .login_body{min-width: 100%;}
-body{min-width: 789px;font-family: sans-serif;}
-/*pageing �쁾20210722異붽��쁾*/
+body{min-width: 100%;font-family: sans-serif;}
+/*pageing */
 .pageing{text-align:center;height:30px;line-height: 30px;padding:2% 0 0;}
 .pageing strong,.pageing a{padding:2px 8px;border:1px solid #999;}
 .pageing strong{background:#de0010;color:#fff;border: 1px solid #de0010;}
@@ -108,8 +108,8 @@ a{text-decoration:none;color:#000;}
 header{width:100%;border-bottom: 5px solid #e6404c;}
 footer{clear:both;width:100%;text-align:center;bottom:0;background:rgba(0,0,0,0.5); z-index: 1;padding:10px 0;color: #e1e1e1;font-weight: 600;font-size: 12px;z-index: 11;}
 .top_logo{background:#de0010;border-top-left-radius:20px;border-top-right-radius:20px;text-align: center;padding: 1.5% 0;}
-header .top_logo{border-radius:0;max-width:1200px;width: 96%;margin: auto;    text-align: left;background: #fff;    padding: 0 0 0.5%;}
-header .top_logo .logo_s_font{display:inline-block;margin-top: 22px;margin-left: 0;font-size: 14px;}
+header .top_logo{border-radius:0;max-width:1200px;width: 96%;margin: auto;    text-align: left;background: #fff;    padding:0.5% 0;}
+header .top_logo .logo_s_font{display:inline-block;/*margin-top: 22px;*/margin-left: 0;font-size: 14px;    vertical-align: text-bottom;}
 .content_table .ux_info_top{width:100%;text-align:right;}
 .content_table .ux_info_top .select_right_ul{margin:0 0.2%;}
 .header_ux_info_top{width:100%;background:#f5f5f5;padding:0.1% 0;}
@@ -243,7 +243,7 @@ header .top_logo .logo_s_font{display:inline-block;margin-top: 22px;margin-left:
 }
 
 .bottom_buttons {
-    margin-top: 62px;
+    margin: 62px auto;
     text-align: center;
 }
 
@@ -603,6 +603,12 @@ input[name="pwd"],input[name="N_Phone"]{height:35px;line-height: 35px;padding-le
 .content_ table .accent_color th,.content_ table .accent_color td{background:#e1f0ff !important;color: #002f5e !important;font-weight:600;}
 .table-scroll tfoot th,.table-scroll tfoot td{color:#626262  !important;font-weight:600;}
 .main-table tbody th,.main-table tbody td{height:24px !important;line-height: normal !important;}
+.STORE_text{padding-left: 11px;
+    font-weight: 500 !important;
+    font-size: 14px;
+    color: #6f6f6f;}
+.nav_top ul li:last-child .nav_ul{left:auto;right:0;transform: translateX(0);}
+.top_logo svg{margin-top:0 !important;}
 
 @media screen and (max-width: 1540px) {
     .log_in_input_box{width:38%;height:75%;}
@@ -611,6 +617,7 @@ input[name="pwd"],input[name="N_Phone"]{height:35px;line-height: 35px;padding-le
 @media screen and (max-width: 1300px) {
     .content_{width:95%;}
     .log_index_content{width:100%;}
+    .content_{    min-height: calc(100vh - 272px);}
 }
 @media screen and (max-width: 1150px) {
     .log_in_input_box{width:50%;}
@@ -628,7 +635,7 @@ input[name="pwd"],input[name="N_Phone"]{height:35px;line-height: 35px;padding-le
     .bid_write_table_col_01{width:10%;}
     .input_id{width:50%;}
     input[name="pwd"]{width:72%;}
-    .btn_confirm_duplication{width:30% !important;}
+    /*.btn_confirm_duplication{width:20% !important;}*/
     .content_ table.bid_write_table tr td{padding:1%;}
     .content_ table.bid_write_table tr th{width:20%;}
     /*.input_storename, .input_storekeepername{width:96%;} 20220113*/
@@ -736,19 +743,34 @@ input[name="pwd"],input[name="N_Phone"]{height:35px;line-height: 35px;padding-le
     }
 
 }
+/* s: 20220223 수정*/
 @media screen and (max-width: 500px) {
     .btn {
         width: 90px;
-        height: 40px;
-        line-height: 40px;
+        height: 35px;
+        line-height: 35px;
         font-size: 13px;
     }
     .content_ table.bid_table tr td{font-size:11px;}
     .content_ table.bid_table th{font-size:12px;}
     .content_ .table_mobile table.bid_table tr td,.content_ .table_mobile table.bid_table th{font-size:13px;}
     .content_table .bottom_buttons{margin:5% 0;}
-
+    .input_storename, .input_storekeepername {
+    width: 93%;
+    font-size: 15px;
+    height: 31px;
+    /* min-width: 156px; */
+    line-height: 31px;
 }
+    .select_date{width:100%;}
+    .select_date select{height:40px;line-height: 40px;font-size:17px !important;padding:0 2%;}
+    .select_date .btn_confirm_duplication {
+    height: 40px !important;
+    line-height: 37px !important;
+}
+.content_{    min-height: calc(100vh - 264px);}
+}
+/* E: 20220223 수정*/
 @media screen and (max-width: 414px) {
     .small_font{font-size:13px;text-align:center;}
     .login_footer{font-size:11px;}
@@ -803,5 +825,5 @@ input[name="pwd"],input[name="N_Phone"]{height:35px;line-height: 35px;padding-le
     .content_ h2 { font-size: 16px !important;text-align:center; }
     input[type="date"], input[type="time"]{width:47%;font-size:12px;}
     .table_mobile table.bid_table th{font-size:12px;}
+ .select_date select{    font-size: 12px !important;padding: 0 1%;}   
 }
-

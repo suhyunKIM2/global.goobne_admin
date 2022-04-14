@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xml:lang="ko" lang="ko" class="no-js" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/common :: head">
+    <link href="/css/reset.css" type="text/css" rel="stylesheet">
+    <link href="/css/common.css" type="text/css" rel="stylesheet">
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/common.js"></script>
+    <meta charset="utf-8">
+</head>
+<!-- 오늘날짜 표시 tr에 class :today 추가 / 강조 tr에 class :accent_color 추가 / table 일정 값보다 데이터가 오바 될때 자동 가로 스크롤 생성 제이쿼리 추가 => tr 첫번째 th에 class :fixed-side 로 유지 -->
+<body>
+<header role="header" data-include="/header.html" th:replace="/fragments/common :: header"></header>
+<div class="content_ content_table" style="max-width: 95%;">
+    <h2>매출조회 - 월별</h2>
+
+    <form th:action="@{/salesmonth}" method="get">
+        <div class="select_date">
+            <select th:name="yyyy" title="년도" class="select w80">
+                <option th:each="yyyy : ${#numbers.sequence(#calendars.year(#calendars.createNow()), 2020)}" th:value="${yyyy}" th:text="${yyyy}"
+                        th:selected="(${#strings.equals(param.yyyy, yyyy)} and not ${#strings.isEmpty(param.yyyy)}) or (${#calendars.year(#calendars.createNow())} eq ${yyyy} and ${#strings.isEmpty(param.yyyy)})"></option>
+            </select>
+            <select th:name="mm" title="월" class="select w80">
+                <option th:each="month : ${#numbers.sequence(1, 12)}" th:text="${month}" th:value="${month}"
+                        th:selected="(${#strings.equals(param.mm, month)} and not ${#strings.isEmpty(param.mm)}) or (${#calendars.month(#calendars.createNow())} eq ${month} and ${#strings.isEmpty(param.mm)})"></option>
+            </select>
+            <select th:name="country" title="국가" class="nation">
+                <option value="">국가 선택</option>
+                <option th:each="country : ${countryList}" th:text="${country.countryName}" th:selected="${#strings.equals(param.country, country.idx)}" th:value="${country.idx}"></option>
+            </select>
+
+            <button class="btn btn_confirm_duplication" style="background:#0c66b3;border:1px solid #0c66b3;" type="submit">검색</button>
+        </div>
+    </form>
+
+    <div class="Excel_btn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2906.28 3265.95" style="width:20.45px;height:23px;vertical-align: text-bottom;margin-right:5px;">
+            <defs>
+                <style>.cls-01 {
+                    isolation: isolate;
+                }
+
+                .cls-02 {
+                    fill: #e6e6e6;
+                }
+
+                .cls-03 {
+                    mix-blend-mode: soft-light;
+                }
+
+                .cls-04 {
+                    fill: #f4f4f4;
+                }
+
+                .cls-05 {
+                    fill: #35b158;
+                }
+
+                .cls-06 {
+                    fill: #0b7623;
+                }
+
+                .cls-07 {
+                    fill: #fffefc;
+                }</style>
+            </defs>
+            <g class="cls-01">
+                <g id="레이어_2" data-name="레이어 2">
+                    <g id="Livello_6" data-name="Livello 6">
+                        <path class="cls-02" d="M2049.1,0H571.6C444.06,0,339.7,104.35,339.7,231.9V3034c0,127.55,104.36,231.91,231.9,231.91H2674c127.55,0,231.9-104.36,231.9-231.91V866.2Z"/>
+                        <path class="cls-03" d="M2048.64.05,1945.82,799.59c0,127.55,104.35,231.91,231.89,231.91l728.57-163L2048.73,0A.05.05,0,0,0,2048.64.05Z"/>
+                        <path class="cls-04" d="M2049.75.12l1.55,633.23c0,127.55,104.36,231.9,231.91,231.9l623.07,1.27Z"/>
+                        <path class="cls-05" d="M.44,1185.84V2384.51c1.78,0,3.56-.12,5.35-.12H2640.72V1185.7H5.79C4,1185.7,2.22,1185.8.44,1185.84Z"/>
+                        <polygon class="cls-06" points="0 2385.06 339.98 2662.09 339.98 2384.51 0 2385.06"/>
+                        <path class="cls-07" d="M835.76,1774.34l218.5,391.27H901.82L768.43,1903.92l-26.68-57.17-27.94,57.17L583,2165.61H431.79l214.69-391.27L436.87,1403.39H589.31l128.31,249,24.13,57.17,26.68-57.17,128.31-249h149.9Z"/>
+                        <path class="cls-07" d="M1149.53,2165.61V1403.39H1275.3v650.43h335.37v111.79Z"/>
+                        <path class="cls-07" d="M1747.86,1992.84a276.88,276.88,0,0,0,55.89,36.84q25.41,14,61,25.41t78.76,11.43q66,0,95.28-29.21t29.22-76.23q0-21.58-5.72-38.74t-22.23-32.4q-16.51-15.24-46.37-29.22t-76.85-29.21q-59.73-19.07-102.9-40t-71.78-47.64q-28.58-26.67-42.56-61t-14-78.76q0-99.09,66.06-158.16t193.09-59.07q66,0,112.43,12.7t75.59,26.68q34.3,16.53,57.17,38.11l-68.6,102.9a241.42,241.42,0,0,0-47-31.76q-22.86-11.43-55.89-21.59t-73.69-10.17q-57.16,0-88.29,24.77T1825.35,1599q0,19,7,34.3t23.5,28.58q16.5,13.35,45.1,26t71.77,26.68q64.8,19.06,109.25,42.56t73.05,52.08q28.59,28.59,41.29,63.52t12.7,79.4q0,48.3-16.51,90.83a202.4,202.4,0,0,1-48.91,73.68q-32.4,31.14-81.31,48.91t-115,17.79q-68.61,0-118.78-14.61t-83.21-32.4q-39.39-21.58-66.06-48.27Z"/>
+                    </g>
+                </g>
+            </g>
+        </svg>
+        DOWNLOAD
+    </div>
+
+    <div id="table-scroll" class="table-scroll" style="max-width: 100%;">
+        <div class="table-wrap">
+            <table class="main-table">
+                <thead>
+                <tr>
+                    <th class="fixed-side" scope="col">일자</th>
+                    <th class="fixed-side" scope="col">합계</th>
+                    <th scope="col" th:each="obj : ${storeList}">
+                        <div th:text="${obj.country.countryName}">홍콩</div>
+                        <div th:text="${obj.storeName}">침사추이</div>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="sales, salesIdx : ${salesList}" th:class="${#strings.equals(sales.key, #calendars.format(#calendars.createNow(), 'yyyy-MM')) ? 'today' : ''}">
+                    <th class="fixed-side" th:text="${sales.key}">2021-10-01</th>
+                    <td th:text="${#numbers.formatDecimal(#aggregates.sum(sales.value.![value]), 0 , 'COMMA', 0, 'POINT')}">0</td>
+                    <td th:each="store : ${storeList}">
+                        <th:block th:each="salesObj, indx : ${sales}" th:with="objList = ${salesObj.value}">
+                            <th:block th:each="obj : ${objList}">
+                                <th:block th:if="${obj.key.idx eq store.idx}" th:text="${#numbers.formatDecimal(obj.value, 0, 'COMMA', 0, 'POINT')}" />
+                            </th:block>
+                        </th:block>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th class="fixed-side" th:text="'누계 실적'">누계 실적</th>
+                    <td th:text="${#numbers.formatDecimal(#aggregates.sum(salesSum.![value]), 0,'COMMA', 0, 'POINT')}">0</td>
+                    <td th:each="store : ${storeList}">
+                        <th:block th:each="obj : ${salesSum}" th:if="${obj.key.idx eq store.idx}" th:text="${#numbers.formatDecimal(obj.value, 0, 'COMMA', 0, 'POINT')}" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="fixed-side" th:text="'누계 목표'">누계 목표</th>
+                    <td th:text="${#numbers.formatDecimal(#aggregates.sum(salesTarget.![value]), 0,'COMMA', 0, 'POINT')}">0</td>
+                    <td th:each="store : ${storeList}">
+                        <th:block th:each="obj : ${salesTarget}" th:if="${obj.key.idx eq store.idx}" th:text="${#numbers.formatDecimal(obj.value, 0, 'COMMA', 0, 'POINT')}" />
+                    </td>
+                </tr>
+                <tr class="accent_color">
+                    <th class="fixed-side">달성율</th>
+                    <td th:text="${#numbers.formatPercent((#aggregates.sum(salesSum.![value]) * 1.0) / (#aggregates.sum(salesTarget.![value]) * 1.0), 1, 0)}">0</td>
+                    <td th:each="store : ${storeList}">
+                        <th:block th:each="sum : ${salesSum}">
+                            <th:block th:each="target : ${salesTarget}" th:if="${target.key.idx eq store.idx and sum.key.idx eq store.idx}" th:text="${#numbers.formatPercent(sum.value / target.value, 1, 0)}" />
+                        </th:block>
+                    </td>
+                </tr>
+                <tr th:each="sales, salesIdx : ${countrySalesLastYear}">
+                    <th class="fixed-side" th:text="'전년비'">전년비</th>
+                    <td th:text="${#numbers.formatPercent(#aggregates.sum(salesSum.![value]) / #aggregates.sum(sales.value.![value]), 1, 0)}">0</td>
+                    <td th:each="store : ${storeList}">
+                        <th:block th:each="salesObj, indx : ${sales}" th:with="objList = ${salesObj.value}">
+                            <th:block th:each="last : ${objList}">
+                                <th:block th:each="sum : ${salesSum}">
+                                    <th:block th:if="${sum.key.idx eq store.idx and last.key.idx eq store.idx}" th:text="${#numbers.formatPercent(sum.value / last.value, 1,0)}"/>
+                                </th:block>
+                            </th:block>
+                        </th:block>
+                    </td>
+                </tr>
+                <tr th:each="sales, salesIdx : ${countrySalesLastYear}">
+                    <th class="fixed-side" th:text="'전년'">전년</th>
+                    <td th:text="${#numbers.formatDecimal(#aggregates.sum(sales.value.![value]), 0,'COMMA', 0, 'POINT')}">0</td>
+                    <td th:each="store : ${storeList}">
+                        <th:block th:each="salesObj, indx : ${sales}" th:with="objList = ${salesObj.value}">
+                            <th:block th:each="obj : ${objList}"  th:if="${obj.key.idx eq store.idx}" th:text="${#numbers.formatDecimal(obj.value, 0, 'COMMA', 0, 'POINT')}" />
+                        </th:block>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+<footer role="footer" data-include="/footer.html" th:replace="/fragments/common :: footer"></footer>
+<script>
+    const getExcel = function () {
+        const $yyyy = document.querySelector('select[name="yyyy"]');
+        const $mm = document.querySelector('select[name="mm"]');
+        const $country = document.querySelector('select[name="country"]');
+
+        location.href = '/salesmonth/exceldown?yyyy=' + $yyyy.value + '&mm=' + $mm.value + '&country=' + $country.value;
+    }
+
+    const $excelBtn = document.querySelector('.Excel_btn');
+    $excelBtn.addEventListener('click', getExcel, false);
+
+    const $tableTd = document.querySelectorAll('.main-table td');
+
+    for (const text in $tableTd) { // 테이블 td 공백이면 0 으로 채움
+        if ($tableTd[text].innerHTML.trim() == '')
+            $tableTd[text].innerHTML = '0';
+    }
+</script>
+</body>
+</html>
